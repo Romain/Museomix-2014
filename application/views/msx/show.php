@@ -31,6 +31,7 @@
         <?php echo form_close(); ?>
 
         <?php include('inc/js.php'); ?>
+        <script src="<?php echo base_url('assets/js/kinect.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
 
@@ -68,8 +69,6 @@
                         echo '"'.$pictures[$i]->{'sound'}.'"';
                     } 
                 ?>];
-
-                console.log(images);
 
                 // Set a pointer to be used with the images array.
                 var imagesPointer = 0;
