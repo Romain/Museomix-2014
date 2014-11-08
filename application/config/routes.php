@@ -42,6 +42,7 @@ $route['default_controller'] = "msx";
 $route['404_override'] = '';
 
 $route['picture/add'] = 'msx/add_picture';
+$route['show'] = 'msx/show';
 
 $route['private/migrate'] = 'migrate';
 

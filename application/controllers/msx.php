@@ -65,7 +65,7 @@ class Msx extends CI_Controller {
 
 			// If the upload failed
 			if ( ! $this->upload->do_upload('picture')) {
-				$data['message'] = "Une erreur est survenue lors de l'envoi de votre photo.";
+				$data['message'] = "Une erreur est survenue lors du partage de votre photo.";
 				$data['message_type'] = "error";
 			}
 
@@ -76,6 +76,16 @@ class Msx extends CI_Controller {
 					$comment = $this->input->post('comment', TRUE);
 				else
 					$comment = NULL;
+
+				if(isset($_POST['sound']) && (strlen($_POST['sound']) != 0))
+					$sound = $this->input->post('sound', TRUE);
+				else
+					$sound = NULL;
+
+				if(isset($_POST['name']) && (strlen($_POST['name']) != 0))
+					$name = $this->input->post('name', TRUE);
+				else
+					$name = NULL;
 
 				$upload = array('upload_data' => $this->upload->data());
 				$file = $upload['upload_data']['file_name'];
@@ -93,12 +103,14 @@ class Msx extends CI_Controller {
 				$params = array(
 					"secret_id" => $secret_id,
 					"picture" => $file_path,
+					"sound" => $sound,
 					"comment" => $comment,
+					"name" => $name,
 					"created_at" => time()
 				);
 				$picture_id = $this->msx_model->add_picture($params);
 
-				$data['message'] = "Votre photo a bien été envoyée.<br />"
+				$data['message'] = "Votre photo a bien été partagée.<br />"
 									."Retrouvez-la dans l'espace détente.";
 				$data['message_type'] = "success";
 			}
@@ -106,13 +118,36 @@ class Msx extends CI_Controller {
 
 		// No picture has been selected
 		else {
-			
+			$data['message'] = "Aucune photo n'a été partagée.";
+			$data['message_type'] = "error";
 		}
 
 		if(isset($data))
 			$this->load->view('msx/add_picture', $data);
 		else
 			$this->load->view('msx/add_picture');
+	}
+
+
+
+    /**
+     *
+     * Controller which displays the pictures
+     *
+     */
+
+	public function show() {
+
+		// We prepare data that need to be displayed.
+		$data = array();
+		$data = $this->prepare_data($data);
+
+		$data['pictures'] = $this->msx_model->get_pictures();
+
+		if(isset($data))
+			$this->load->view('msx/show', $data);
+		else
+			$this->load->view('msx/show');
 	}
 
 

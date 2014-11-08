@@ -82,7 +82,7 @@ class Msx_model extends CI_Model {
     public function get_pictures(){
 
         $this->db->select('*');
-        $this->db->order_by("timestamp", "desc"); 
+        $this->db->order_by("updated_at", "desc"); 
         
         $query = $this->db->get(DBPREFIX.'pictures');
         

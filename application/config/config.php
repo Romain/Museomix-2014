@@ -16,7 +16,8 @@
 */
 if(strcmp(ENVIRONMENT, "development") == 0)
 	$config['base_url']	= 'http://localhost:8888/Museomix/2014/';
-if(strcmp(ENVIRONMENT, "test") == 0)
+
+elseif(strcmp(ENVIRONMENT, "test") == 0)
 	$config['base_url']	= 'http://192.168.246.128:8888/Museomix/2014/';
 
 elseif(strcmp(ENVIRONMENT, "preprod") == 0)

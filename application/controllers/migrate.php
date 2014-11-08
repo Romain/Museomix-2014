@@ -31,7 +31,7 @@ class Migrate extends CI_Controller {
 		if(in_array($ip, unserialize(WHITELISTED_IPS))) {
 			$this->load->library('migration');
 
-			if ( ! $this->migration->version(1)) {
+			if ( ! $this->migration->version(3)) {
 		     	show_error($this->migration->error_string());
 		    }
 		    else
