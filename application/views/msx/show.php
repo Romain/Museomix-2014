@@ -20,6 +20,23 @@
             <div id="image-top"></div>
         </div>
 
+        <div id="picture-details">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div id="firstname"></div>
+                    <div id="museozoom">
+                        <img src="<?php echo base_url('assets/img/museozoom.png'); ?>" alt="MuseoZoom" title="MuseoZoom">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <div id="comment"></div>
+                </div>
+                <div class="col-sm-1">
+                    <img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo MuseoZoom" title="Logo MuseoZoom">
+                </div>
+            </div>
+        </div>
+
         <div id="sounds">
             <audio id="sound">
                 <source src="<?php echo base_url('sounds/'.$pictures[0]->{'sound'}); ?>" type="audio/mpeg">
@@ -48,10 +65,11 @@
                 }
 
                 // Resize the image div
-                var screenWidth = screen.width;
-                var screenHeight = screen.height;
+                var screenWidth = window.innerWidth;
+                var screenHeight = window.innerHeight;
                 $("#image-back").width(screenWidth);
                 $("#image-back").height(screenHeight);
+                console.log(screenWidth+" - "+screenHeight);
 
                 // Set the images
                 var images = [<?php 
@@ -71,6 +89,26 @@
                             echo ",";
 
                         echo '"'.$pictures[$i]->{'sound'}.'"';
+                    } 
+                ?>];
+
+                // Set the comments
+                var comments = [<?php 
+                    for($i=0; $i<count($pictures); $i++) {
+                        if($i != 0)
+                            echo ",";
+
+                        echo '"'.$pictures[$i]->{'comment'}.'"';
+                    } 
+                ?>];
+
+                // Set the firstnames
+                var firstnames = [<?php 
+                    for($i=0; $i<count($pictures); $i++) {
+                        if($i != 0)
+                            echo ",";
+
+                        echo '"'.$pictures[$i]->{'name'}.'"';
                     } 
                 ?>];
 
@@ -125,6 +163,10 @@
                             }, 500);   
                         }
 
+                        // Set the other information
+                        $("#firstname").empty().text(firstnames[imagesPointer]);
+                        $("#comment").empty().text(comments[imagesPointer]);
+
                         // Pause any sound playing
                         sound.pause();
 
@@ -161,10 +203,14 @@
                                 var obj = $.parseJSON(data);
                                 var newImages = new Array;
                                 var newSounds = new Array;
+                                var newComments = new Array;
+                                var newNames = new Array;
                                 
                                 for(var i=0; i<obj.pictures.length; i++) {
                                     newImages.push(obj.pictures[i].picture);
                                     newSounds.push(obj.pictures[i].sound);
+                                    newComments.push(obj.pictures[i].comment);
+                                    newNames.push(obj.pictures[i].name);
                                 }
 
                                 if(newImages.length != numberOfImages) {
@@ -174,6 +220,8 @@
                                 
                                 images = newImages;
                                 sounds = newSounds;
+                                comment = newComments;
+                                firstnames = newNames;
                             },
                             error: function(data, textStatus, jqXHR){
                                 var obj = $.parseJSON(data);
