@@ -43,6 +43,7 @@ $route['404_override'] = '';
 
 $route['picture/add'] = 'msx/add_picture';
 $route['show'] = 'msx/show';
+$route['pictures/update_list'] = 'msx/update_pictures_list';
 
 $route['private/migrate'] = 'migrate';
 

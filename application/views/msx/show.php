@@ -27,6 +27,9 @@
             </audio>
         </div>
 
+        <?php echo form_open_multipart( base_url('#'), array('id' => 'update-pictures', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
+        <?php echo form_close(); ?>
+
         <?php include('inc/js.php'); ?>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -66,12 +69,17 @@
                     } 
                 ?>];
 
+                console.log(images);
+
                 // Set a pointer to be used with the images array.
                 var imagesPointer = 0;
                 var imagePosition = "back";
 
                 // Make the image rotate
                 setNewImage();
+
+                // Update the list of images and sounds
+                updatePicturesList()
 
 
                 /**************************************************/
@@ -127,6 +135,42 @@
 
                         setNewImage();
                     }, 5000);
+                }
+
+
+
+                function updatePicturesList() {
+                    setTimeout(function() {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= base_url("pictures/update_list") ?>',
+                            data: { 
+                                '0': $("form#update-pictures input[name='0']").val(), 
+                                '1': $("form#update-pictures input[name='1']").val(), 
+                                'csrf_museomix_2014': $("form#update-pictures input[name='csrf_museomix_2014']").val()
+                            },
+                            success: function(data, textStatus, jqXHR){
+                                var obj = $.parseJSON(data);
+                                var newImages = new Array;
+                                var newSounds = new Array;
+                                
+                                for(var i=0; i<obj.pictures.length; i++) {
+                                    newImages.push(obj.pictures[i].picture);
+                                    newSounds.push(obj.pictures[i].sound);
+                                }
+                                
+                                images = newImages;
+                                sounds = newSounds;
+                            },
+                            error: function(data, textStatus, jqXHR){
+                                var obj = $.parseJSON(data);
+                                console.log(obj);
+                            }
+                        });
+                        
+                        updatePicturesList();
+                    }, 10000);
                 }
             });
         </script>

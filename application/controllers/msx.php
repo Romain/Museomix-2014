@@ -152,6 +152,20 @@ class Msx extends CI_Controller {
 
 
 
+    /**
+     *
+     * Controller which updates the list of pictures from ajax requests
+     *
+     */
+
+	public function update_pictures_list() {
+
+		$pictures = $this->msx_model->get_pictures();
+		echo json_encode( array("pictures" => $pictures) );
+	}
+
+
+
 
 
 	/* Private functions */	

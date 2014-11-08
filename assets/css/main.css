@@ -67,6 +67,9 @@ form#add-picture label.error {
   height: 100%;
   opacity: 0;
 }
+form#update-pictures {
+  display: none;
+}
 
 
 
