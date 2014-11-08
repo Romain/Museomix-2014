@@ -1,0 +1,75 @@
+/* Font styles
+-------------------------------------------------- */
+
+/* @import url(http://fonts.googleapis.com/css?family=Dosis:300,400,600|Open+Sans:400,700,300|Open+Sans+Condensed:300,700); */
+
+
+
+
+/* Main styles
+-------------------------------------------------- */
+
+body {
+  padding: 10px;
+  font-family: Helvetica, Tahoma, sans-serif;
+  font-size: 13px;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/* Add picture styles
+-------------------------------------------------- */
+
+form#add-picture label {
+  display: block;
+}
+form#add-picture label.error {
+  background-color: #F2DEDE;
+  color: #A94442;
+  border: 1px solid transparent;
+  border-color: #EBCCD1;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+
+
+/* General styles
+-------------------------------------------------- */
+
+.shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 12px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 12px;
+}
+
+.hidden {
+  display: none;
+}
+.margin-top {
+  margin-top: 20px;
+}
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.full {
+  width: 100%;
+}
+
+.clear {
+  clear: both;
+}

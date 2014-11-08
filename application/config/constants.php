@@ -37,5 +37,22 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+
+/*
+|--------------------------------------------------------------------------
+| Whitelisted IP addresses
+|--------------------------------------------------------------------------
+|
+| These are the IP addresses allowed to access to the migrate controller.
+|
+*/
+
+$ips = array(
+	'46.18.229.203',
+	'::1'
+);
+define("WHITELISTED_IPS", serialize($ips));
+
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

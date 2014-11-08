@@ -48,21 +48,74 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
+if(strcmp(ENVIRONMENT, "development") == 0){
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'root';
+	$db['default']['password'] = 'root';
+	$db['default']['database'] = 'museomix';
+	$db['default']['dbdriver'] = 'mysql';
+	$db['default']['dbprefix'] = '';
+	$db['default']['pconnect'] = TRUE;
+	$db['default']['db_debug'] = TRUE;
+	$db['default']['cache_on'] = FALSE;
+	$db['default']['cachedir'] = '';
+	$db['default']['char_set'] = 'utf8';
+	$db['default']['dbcollat'] = 'utf8_unicode_ci';
+	$db['default']['swap_pre'] = '';
+	$db['default']['autoinit'] = TRUE;
+	$db['default']['stricton'] = FALSE;
+}
+elseif(strcmp(ENVIRONMENT, "test") == 0){
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'root';
+	$db['default']['password'] = 'root';
+	$db['default']['database'] = 'museomix';
+	$db['default']['dbdriver'] = 'mysql';
+	$db['default']['dbprefix'] = '';
+	$db['default']['pconnect'] = TRUE;
+	$db['default']['db_debug'] = TRUE;
+	$db['default']['cache_on'] = FALSE;
+	$db['default']['cachedir'] = '';
+	$db['default']['char_set'] = 'utf8';
+	$db['default']['dbcollat'] = 'utf8_unicode_ci';
+	$db['default']['swap_pre'] = '';
+	$db['default']['autoinit'] = TRUE;
+	$db['default']['stricton'] = FALSE;
+}
+elseif(strcmp(ENVIRONMENT, "preprod") == 0) {
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'archi_dpsql';
+	$db['default']['password'] = 'Arch1@2@14';
+	$db['default']['database'] = 'archi_development';
+	$db['default']['dbdriver'] = 'mysql';
+	$db['default']['dbprefix'] = '';
+	$db['default']['pconnect'] = TRUE;
+	$db['default']['db_debug'] = TRUE;
+	$db['default']['cache_on'] = FALSE;
+	$db['default']['cachedir'] = '';
+	$db['default']['char_set'] = 'utf8';
+	$db['default']['dbcollat'] = 'utf8_unicode_ci';
+	$db['default']['swap_pre'] = '';
+	$db['default']['autoinit'] = TRUE;
+	$db['default']['stricton'] = FALSE;
+}
+else {
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'archishop';
+	$db['default']['password'] = 'CgeFaTYz2K3q';
+	$db['default']['database'] = 'archishop';
+	$db['default']['dbdriver'] = 'mysql';
+	$db['default']['dbprefix'] = '';
+	$db['default']['pconnect'] = TRUE;
+	$db['default']['db_debug'] = TRUE;
+	$db['default']['cache_on'] = FALSE;
+	$db['default']['cachedir'] = '';
+	$db['default']['char_set'] = 'utf8';
+	$db['default']['dbcollat'] = 'utf8_unicode_ci';
+	$db['default']['swap_pre'] = '';
+	$db['default']['autoinit'] = TRUE;
+	$db['default']['stricton'] = FALSE;
+}
 
 
 /* End of file database.php */

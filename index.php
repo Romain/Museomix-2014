@@ -18,7 +18,33 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+if(strcmp($_SERVER['SERVER_NAME'], "localhost") == 0){
 	define('ENVIRONMENT', 'development');
+	define('DBPREFIX', '2014_');
+	define('DASHBOARD', '/Museomix/2014/');
+	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
+}
+elseif(strcmp($_SERVER['SERVER_NAME'], "192.168.246.128") == 0){
+	define('ENVIRONMENT', 'test');
+	define('DBPREFIX', '2014_');
+	define('DASHBOARD', '/Museomix/2014/');
+	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
+}
+elseif(strcmp($_SERVER['SERVER_NAME'], "xxx") == 0){
+	define('ENVIRONMENT', 'preprod');
+	define('DBPREFIX', 'swatch_fwt_');
+	define('DASHBOARD', '/');
+	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
+	ini_set('memory_limit','64M');
+}
+elseif((strcmp($_SERVER['SERVER_NAME'], "www.xxx.com") == 0) || (strcmp($_SERVER['SERVER_NAME'], "xxx.com") == 0)){
+	define('ENVIRONMENT', 'production');
+	define('DBPREFIX', 'swatch_fwt_');
+	define('DASHBOARD', '/');
+	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
+	ini_set('memory_limit','64M');
+}
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -33,6 +59,8 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
+		case 'preprod':
+		case 'test':
 			error_reporting(E_ALL);
 		break;
 	
@@ -56,7 +84,10 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
+if((strcmp(ENVIRONMENT, "development") == 0) || (strcmp(ENVIRONMENT, "test") == 0))
 	$system_path = 'system';
+else
+	$system_path = '../system';
 
 /*
  *---------------------------------------------------------------
