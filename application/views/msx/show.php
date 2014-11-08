@@ -31,7 +31,6 @@
         <?php echo form_close(); ?>
 
         <?php include('inc/js.php'); ?>
-        <script src="<?php echo base_url('assets/js/kinect.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
 
