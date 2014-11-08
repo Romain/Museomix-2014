@@ -34,11 +34,15 @@
         <script type="text/javascript">
             $(document).ready(function() {
 
+                // Set vars to deal with the update of images
+                var numberOfImages = 0;
+                var imagesChanged = 0;
+
                 // Play the sound associated to the image
                 var sound = $("#sounds audio#sound").get(0);
-                var firstSound = "<?php echo $pictures[0]->{'picture'} ?>";
+                var firstSound = "<?php echo $pictures[0]->{'sound'} ?>";
                 sound.volume = 1;
-                if(firstSound != "") {
+                if(firstSound != 0) {
                     sound.load();
                     sound.play();
                 }
@@ -58,6 +62,7 @@
                         echo '"'.$pictures[$i]->{'picture'}.'"';
                     } 
                 ?>];
+                numberOfImages = images.length;
 
                 // Set the sounds
                 var sounds = [<?php 
@@ -92,6 +97,11 @@
                         else
                             imagesPointer = 0;
 
+                        if(imagesChanged == 1) {
+                            imagesPointer = 0;
+                            imagesChanged = 0;
+                        }
+
                         // Set the which div will receive the image
                         if(imagePosition == "back")
                             imagePosition = "top";
@@ -123,7 +133,7 @@
                         $("#sounds audio#sound source").attr("src", "<?php echo base_url('sounds') ?>/"+selectedSound);
 
                         // Play the new sound
-                        if(selectedSound != "") {
+                        if(selectedSound != 0) {
                             sound.load();
                             sound.play();
                         }
@@ -135,6 +145,8 @@
 
 
                 function updatePicturesList() {
+                    imagesChanged = 0;
+
                     setTimeout(function() {
 
                         $.ajax({
@@ -153,6 +165,11 @@
                                 for(var i=0; i<obj.pictures.length; i++) {
                                     newImages.push(obj.pictures[i].picture);
                                     newSounds.push(obj.pictures[i].sound);
+                                }
+
+                                if(newImages.length != numberOfImages) {
+                                    imagesChanged = 1;
+                                    numberOfImages = newImages.length;
                                 }
                                 
                                 images = newImages;
