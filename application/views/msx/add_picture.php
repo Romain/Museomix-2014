@@ -78,7 +78,7 @@
 
                 // Play sound when the user changes the menu
                 var sound = $("#sounds audio#sound").get(0);
-                sound.notification = 1;
+                sound.volume = 1;
 
                 $("#add-picture select[name='sound']").change(function() {
                     // Pause any sound playing
