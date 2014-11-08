@@ -120,9 +120,6 @@
                         // Pause any sound playing
                         sound.pause();
 
-                        // Rewind to the beginning of the sound
-                        sound.currentTime = 0;
-
                         // Set the new sound
                         var selectedSound = sounds[imagesPointer];
                         $("#sounds audio#sound source").attr("src", "<?php echo base_url('sounds') ?>/"+selectedSound);
