@@ -3,9 +3,16 @@
     <head>
         <?php include('inc/meta.php'); ?>
         <?php include('inc/css.php'); ?>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
         <div class="wrapper">
+            <a href="#" title="Accéder à l'aide" data-toggle="modal" data-target="#helpModal">
+                <div id="help">
+                    <i class="fa fa-question"></i>
+                </div>
+            </a>
+
             <div class="text-center">
                 <h1>MuseoZoom</h1>
 
@@ -48,6 +55,26 @@
                 <source src="<?php echo base_url('sounds/sound-1.mp3') ?>" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Aide</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Retrouvez toute l'aide nécessaire à l'utilisation de MuseoZoom dans cette section.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <?php include('inc/js.php'); ?>

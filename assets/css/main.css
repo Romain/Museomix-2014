@@ -36,6 +36,17 @@ img {
 /* Add picture styles
 -------------------------------------------------- */
 
+#help {
+  position: fixed;
+  top: 5px;
+  right: 0px;
+  font-size: 30px;
+  background-color: #DDD;
+  border: solid 1px #AAA;
+  border-radius: 5px 0px 0px 5px;
+  padding: 5px 20px 5px 20px;
+  margin-right: -2px;
+}
 form#add-picture label {
   display: block;
 }
@@ -47,6 +58,13 @@ form#add-picture label.error {
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 10px;
+}
+
+.modal-body {
+  position: relative;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 15px;
 }
 
 
