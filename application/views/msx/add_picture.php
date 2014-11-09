@@ -14,7 +14,13 @@
             </a>
 
             <div class="text-center">
-                <h1>MuseoZoom</h1>
+                <h1 class="text-center">
+                    <img src="<?php echo base_url('assets/img/museozoom-mobile.png'); ?>" alt="MuseoZoom" title="MuseoZoom">
+                </h1>
+
+                <div id="gun" class="text-center">
+                    <img src="<?php echo base_url('assets/img/squared-gun.png'); ?>" alt="Gun" title="Gun">
+                </div>
 
                 <?php if(isset($message)) : ?>
                     <div class="alert alert-<?php echo $message_type ?>"><?php echo $message; ?></div>
@@ -23,8 +29,9 @@
                 <?php echo form_open_multipart( base_url('picture/add'), array('id' => 'add-picture', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
 
                     <div class="form-group">
-                        <label for="picture">Prenez une photo</label>
-                        <?php echo form_upload( array('name' => 'picture', 'placeholder' => 'Votre photo', 'class' => 'form-control', 'id' => 'picture') ); ?>
+                        <div id="picture-container">
+                            <?php echo form_upload( array('name' => 'picture', 'placeholder' => 'Votre photo', 'class' => 'form-control', 'id' => 'picture') ); ?>
+                        </div>
                     </div>
 
                     <div class="form-group">

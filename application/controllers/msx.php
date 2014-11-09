@@ -116,12 +116,6 @@ class Msx extends CI_Controller {
 			}
 		}
 
-		// No picture has been selected
-		else {
-			$data['message'] = "Aucune photo n'a été partagée.";
-			$data['message_type'] = "error";
-		}
-
 		if(isset($data))
 			$this->load->view('msx/add_picture', $data);
 		else
