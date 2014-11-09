@@ -61,6 +61,7 @@
                 // Set vars to deal with the update of images
                 var numberOfImages = 0;
                 var imagesChanged = 0;
+                var rotate = "launch";
 
                 // Play the sound associated to the image
                 var sound = $("#sounds audio#sound").get(0);
@@ -124,7 +125,14 @@
 
                 // Make the image rotate
                 var rotation = setInterval(function() {
-                    setNewImage(imagesPointer);
+                    console.log(rotate);
+                    if(rotate == "launch") {
+                        setNewImage(imagesPointer);
+                    }
+                    else if(rotate == "stop") {
+                        window.clearInterval(rotation);
+                        rotate = "doNothing";
+                    }
                 }, 5000);
 
                 // Update the list of images and sounds
@@ -262,19 +270,21 @@
                             },
                             success: function(data, textStatus, jqXHR){
                                 var obj = $.parseJSON(data);
-                                console.log(obj.action.action);
                                 
                                 if(obj.action != 0)
                                     var action = obj.action.action;
 
                                 if(action == "left") {
                                     imagesPointer -= 2;
-                                    window.clearInterval(rotation);
                                     setNewImage(imagesPointer);
+                                    rotate = "doNoting";
                                 }
                                 else if(action == "right") {
-                                    window.clearInterval(rotation);
                                     setNewImage(imagesPointer);
+                                    rotate = "doNoting";
+                                }
+                                else if(action == "top") {
+                                    rotate = "launch";
                                 }
                             },
                             error: function(data, textStatus, jqXHR){
@@ -284,7 +294,7 @@
                         });
                         
                         getAction();
-                    }, 2000);
+                    }, 1000);
                 }
             });
         </script>
