@@ -138,7 +138,7 @@
                         window.clearInterval(rotation);
                         rotate = "doNothing";
                     }
-                }, 5000);
+                }, 10000);
 
                 // Use the timer to relaunch the rotation after 1 minute
                 var timing = setInterval(function() {

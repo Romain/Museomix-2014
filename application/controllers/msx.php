@@ -42,13 +42,13 @@ class Msx extends CI_Controller {
 		$data = $this->prepare_data($data);
 
 		if(!is_dir('pictures/'))
-			mkdir('pictures/', 0700);
+			mkdir('pictures/', 0755);
 
 		if(!is_dir('pictures/'.date('Y').'/'))
-			mkdir('pictures/'.date('Y').'/', 0700);	
+			mkdir('pictures/'.date('Y').'/', 0755);	
 
 		if(!is_dir('pictures/'.date('Y').'/'.date('m').'/'))
-			mkdir('pictures/'.date('Y').'/'.date('m').'/', 0700);
+			mkdir('pictures/'.date('Y').'/'.date('m').'/', 0755);
 
 		$path = 'pictures/'.date('Y').'/'.date('m').'/';
 
@@ -142,6 +142,19 @@ class Msx extends CI_Controller {
 			$this->load->view('msx/show', $data);
 		else
 			$this->load->view('msx/show');
+	}
+
+
+
+    /**
+     *
+     * Controller which redirects to a flashcode app download page
+     *
+     */
+
+	public function qrcode() {
+
+		redirect('http://www.flashcode.fr/telecharger/');		
 	}
 
 

@@ -254,12 +254,18 @@ $config['encryption_key'] = '+!;c302b1e957JL!â,}{6;:P%â';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
+
 $config['sess_cookie_name']		= 'museomix_2014_session';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= TRUE;
-$config['sess_table_name']		= '2014_sessions';
+
+if(strcmp(ENVIRONMENT, "production") != 0)
+	$config['sess_table_name']		= '2014_sessions';
+else
+	$config['sess_table_name']		= 'museozoom_sessions';
+
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 300;

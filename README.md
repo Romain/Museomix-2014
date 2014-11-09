@@ -15,6 +15,7 @@ Matériel
 - Un spot de lumière bleue pour créer une ambiance
 - Une Kinect détecteur de mouvement pour jouer avec les images
 - Des bruitages qui sont associés aux images par les visiteurs et restitués grâce à une enceinte unidirectionnelle
+- Un clavier et une souris
 
 
 Procédure d'installation

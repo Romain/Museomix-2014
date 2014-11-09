@@ -49,6 +49,8 @@ $route['action/detect/(:any)'] = 'msx/detect_action';
 $route['action/get'] = 'msx/get_last_action';
 $route['action/delete'] = 'msx/delete_action';
 
+$route['qrcode'] = 'msx/qrcode';
+
 $route['private/migrate'] = 'migrate';
 
 

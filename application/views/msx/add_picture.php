@@ -26,6 +26,8 @@
                     <div class="alert alert-<?php echo $message_type ?>"><?php echo $message; ?></div>
                 <?php endif; ?>
 
+                <div id="error-message" class="alert alert-danger"></div>
+
                 <?php echo form_open_multipart( base_url('picture/add'), array('id' => 'add-picture', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
 
                     <div class="form-group">
@@ -50,7 +52,7 @@
                                 'goupille-sol.mp3' => 'Cartouche qui tombe sur le sol', 
                                 'harpe.mp3' => 'Harpe 1', 
                                 'harpe2.mp3' => 'Harpe 2', 
-                                'lame-de-couteau.mp3' => 'Lame de couteau qu\'on aiguise', 
+                                'lame-de-couteau.mp3' => 'Lame de couteau qu\'on aiguise',
                                 'ours.mp3' => 'Ours'
                             ), '0', 'class="form-control"'); ?>
                     </div>
@@ -118,8 +120,19 @@
                         },
                         name: "Veuillez nous donner votre prénom ou surnom."
                     },
+                    groups: {
+                        username: "picture name"
+                    },
                     errorPlacement: function(error, element) {
-                        error.insertBefore(element);
+                        if (element.attr("name") == "name") {
+                            error.insertBefore(element);
+                        } else {
+                            error.appendTo('#error-message');
+                            $("#error-message").fadeIn();
+                            setTimeout(function() {
+                                $("#error-message").fadeOut();
+                            }, 10000);
+                        }
                     }
                 });
 

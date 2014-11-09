@@ -78,6 +78,7 @@ form#add-picture label {
   display: block;
 }
 form#add-picture label.error {
+  display: block;
   background-color: #F2DEDE;
   color: #A94442;
   border: 1px solid transparent;
@@ -102,6 +103,9 @@ form#add-picture label.error {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+#error-message {
+  display: none;
 }
 
 .modal-body {
