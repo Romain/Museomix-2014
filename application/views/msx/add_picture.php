@@ -36,7 +36,12 @@
 
                     <div class="form-group">
                         <label for="picture">Choisissez un son</label>
-                        <?php echo form_dropdown('sound', array('0' => 'Nos sons d\'ambiance', 'sound-1.mp3' => 'sound-1.mp3', 'sound-2.mp3' => 'sound-2.mp3', 'sound-3.mp3' => 'sound-3.mp3'), '0', 'class="form-control"'); ?>
+                        <?php echo form_dropdown('sound', array(
+                                '0' => 'Nos sons d\'ambiance', 
+                                'arme.mp3' => 'Arme', 
+                                'baleine.mp3' => 'Baleine', 
+                                'canon.mp3' => 'Canon.mp3'
+                            ), '0', 'class="form-control"'); ?>
                     </div>
 
                     <div class="form-group">
@@ -59,7 +64,8 @@
 
         <div id="sounds">
             <audio id="sound">
-                <source src="<?php echo base_url('sounds/sound-1.mp3') ?>" type="audio/mpeg">
+                <source src="<?php echo base_url('assets/sounds/arme.mp3'); ?>" type="audio/mpeg">
+                <source src="<?php echo base_url('assets/sounds/arme.ogg'); ?>" type="audio/ogg">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -86,6 +92,7 @@
 
         <?php include('inc/js.php'); ?>
         <script src="<?php echo base_url('assets/js/validation/dist/jquery.validate.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/audiojs/audiojs/audio.min.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
 
@@ -112,7 +119,6 @@
 
                 // Play sound when the user changes the menu
                 var sound = $("#sounds audio#sound").get(0);
-                sound.volume = 1;
 
                 $("#add-picture select[name='sound']").change(function() {
                     // Pause any sound playing
@@ -123,11 +129,17 @@
 
                     // Set the new sound
                     var selectedSound = $(this).val();
-                    $("#sounds audio#sound source").attr("src", "<?php echo base_url('sounds') ?>/"+selectedSound);
+                    var selectedSoundOgg = selectedSound.substr(0, selectedSound.length - 3) + "ogg";
+                    $("#sounds audio#sound source:first-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
+                    $("#sounds audio#sound source:last-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSoundOgg);
 
                     // Play the new sound
                     sound.load();
                     sound.play();
+                });
+
+                audiojs.events.ready(function() {
+                    var as = audiojs.createAll();
                 });
             });
         </script>

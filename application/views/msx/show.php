@@ -47,6 +47,7 @@
         <div id="sounds">
             <audio id="sound">
                 <source src="<?php echo base_url('assets/sounds/'.$pictures[0]->{'sound'}); ?>" type="audio/mpeg">
+                <source src="<?php echo base_url('assets/sounds/'.substr($pictures[0]->{'sound'}), -3)."ogg"; ?>" type="audio/ogg">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -62,6 +63,7 @@
                 var numberOfImages = 0;
                 var imagesChanged = 0;
                 var rotate = "launch";
+                var timer = 0;
 
                 // Play the sound associated to the image
                 var sound = $("#sounds audio#sound").get(0);
@@ -128,12 +130,29 @@
                     console.log(rotate);
                     if(rotate == "launch") {
                         setNewImage(imagesPointer);
+
+                        // Reset the timer.
+                        timer = 0;
                     }
                     else if(rotate == "stop") {
                         window.clearInterval(rotation);
                         rotate = "doNothing";
                     }
                 }, 5000);
+
+                // Use the timer to relaunch the rotation after 1 minute
+                var timing = setInterval(function() {
+                    console.log(timer);
+                    if(timer == 60) {
+                        rotate = "launch";
+
+                        // Reset the timer.
+                        timer = 0;
+                    }
+                    else {
+                        timer++;
+                    }
+                }, 1000);
 
                 // Update the list of images and sounds
                 updatePicturesList();
@@ -196,7 +215,9 @@
 
                     // Set the new sound
                     var selectedSound = sounds[imagesPointer];
-                    $("#sounds audio#sound source").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
+                    var selectedSoundOgg = selectedSound.substr(0, selectedSound.length - 3) + "ogg";
+                    $("#sounds audio#sound source:first-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
+                    $("#sounds audio#sound source:last-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSoundOgg);
 
                     // Play the new sound
                     if(selectedSound != 0) {
@@ -278,13 +299,16 @@
                                     imagesPointer -= 2;
                                     setNewImage(imagesPointer);
                                     rotate = "doNoting";
+                                    timer = 0;
                                 }
                                 else if(action == "right") {
                                     setNewImage(imagesPointer);
                                     rotate = "doNoting";
+                                    timer = 0;
                                 }
                                 else if(action == "top") {
                                     rotate = "launch";
+                                    timer = 0;
                                 }
                             },
                             error: function(data, textStatus, jqXHR){
