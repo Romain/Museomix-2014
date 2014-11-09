@@ -23,7 +23,7 @@
                 </div>
 
                 <?php if(isset($message)) : ?>
-                    <div class="alert alert-<?php echo $message_type ?>"><?php echo $message; ?></div>
+                    <div id="global-message" class="alert alert-<?php echo $message_type ?>"><?php echo $message; ?></div>
                 <?php endif; ?>
 
                 <div id="error-message" class="alert alert-danger"></div>
@@ -128,6 +128,11 @@
                             }, 10000);
                         }
                     }
+                });
+
+                // Hide the success message when the user takes another picture
+                $("input[type=file]").click(function() {
+                    $("#global-message").fadeOut();
                 });
 
                 // Play sound when the user changes the menu

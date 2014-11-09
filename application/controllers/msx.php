@@ -228,10 +228,7 @@ class Msx extends CI_Controller {
 		$actions = $this->msx_model->get_actions();
 
 		if($actions != FALSE) {
-			$action = $actions[0];
-			for($i=0; $i<count($actions); $i++) {
-				$this->msx_model->delete_action( array("id" => $actions[$i]->{'id'}) );
-			}
+			$action = $actions[count($actions) - 1];
 		}
 		else
 			$action = 0;

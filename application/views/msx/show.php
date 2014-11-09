@@ -57,6 +57,9 @@
         <?php echo form_open_multipart( base_url('#'), array('id' => 'update-pictures', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
         <?php echo form_close(); ?>
 
+        <?php echo form_open_multipart( base_url('#'), array('id' => 'get-action', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
+        <?php echo form_close(); ?>
+
         <?php include('inc/js.php'); ?>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -66,6 +69,7 @@
                 var imagesChanged = 0;
                 var rotate = "launch";
                 var timer = 0;
+                var lastActionId = 0;
 
                 // Play the sound associated to the image
                 var sound = $("#sounds audio#sound").get(0);
@@ -136,9 +140,8 @@
                         // Reset the timer.
                         timer = 0;
                     }
-                    else if(rotate == "stop") {
+                    else if(rotate == "doNothing") {
                         window.clearInterval(rotation);
-                        rotate = "doNothing";
                     }
                 }, 10000);
 
@@ -167,7 +170,7 @@
                 /************* Additional functions ***************/
                 /**************************************************/
 
-                function setNewImage(imageNumber) {
+                function setNewImage() {
                     // Set the image pointer
                     if(imagesPointer < images.length - 1)
                         imagesPointer++;
@@ -178,6 +181,7 @@
                         imagesPointer = 0;
                         imagesChanged = 0;
                     }
+                    console.log("Images Pointer: "+imagesPointer);
 
                     // Set the which div will receive the image
                     if(imagePosition == "back")
@@ -217,14 +221,16 @@
 
                     // Set the new sound
                     var selectedSound = sounds[imagesPointer];
-                    var selectedSoundOgg = selectedSound.substr(0, selectedSound.length - 3) + "ogg";
-                    $("#sounds audio#sound source:first-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
-                    $("#sounds audio#sound source:last-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSoundOgg);
+                    if(typeof selectedSound != 'undefined') {
+                        var selectedSoundOgg = selectedSound.substr(0, selectedSound.length - 3) + "ogg";
+                        $("#sounds audio#sound source:first-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
+                        $("#sounds audio#sound source:last-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSoundOgg);
 
-                    // Play the new sound
-                    if(selectedSound != 0) {
-                        sound.load();
-                        sound.play();
+                        // Play the new sound
+                        if(selectedSound != 0) {
+                            sound.load();
+                            sound.play();
+                        }
                     }
                 }
 
@@ -269,6 +275,7 @@
                             },
                             error: function(data, textStatus, jqXHR){
                                 var obj = $.parseJSON(data);
+                                console.log("error");
                                 console.log(obj);
                             }
                         });
@@ -287,9 +294,9 @@
                             type: 'POST',
                             url: '<?= base_url("action/get") ?>',
                             data: { 
-                                '0': $("form#update-pictures input[name='0']").val(), 
-                                '1': $("form#update-pictures input[name='1']").val(), 
-                                'csrf_museomix_2014': $("form#update-pictures input[name='csrf_museomix_2014']").val()
+                                '0': $("form#get-action input[name='0']").val(), 
+                                '1': $("form#get-action input[name='1']").val(), 
+                                'csrf_museomix_2014': $("form#get-action input[name='csrf_museomix_2014']").val()
                             },
                             success: function(data, textStatus, jqXHR){
                                 var obj = $.parseJSON(data);
@@ -297,20 +304,27 @@
                                 if(obj.action != 0)
                                     var action = obj.action.action;
 
-                                if(action == "left") {
-                                    imagesPointer -= 2;
-                                    setNewImage(imagesPointer);
-                                    rotate = "doNoting";
-                                    timer = 0;
-                                }
-                                else if(action == "right") {
-                                    setNewImage(imagesPointer);
-                                    rotate = "doNoting";
-                                    timer = 0;
-                                }
-                                else if(action == "top") {
-                                    rotate = "launch";
-                                    timer = 0;
+                                console.log("Action: "+obj.action);
+                                console.log("Last action ID: "+lastActionId);
+                                console.log("Action ID: "+obj.action.id);
+                                if(action.id != lastActionId) {
+                                    lastActionId = obj.action.id;
+
+                                    if(action == "left") {
+                                        imagesPointer -= 2;
+                                        setNewImage();
+                                        // rotate = "doNoting";
+                                        timer = 0;
+                                    }
+                                    else if(action == "right") {
+                                        setNewImage();
+                                        // rotate = "doNoting";
+                                        timer = 0;
+                                    }
+                                    /* else if(action == "top") {
+                                        rotate = "launch";
+                                        timer = 0;
+                                    }*/
                                 }
                             },
                             error: function(data, textStatus, jqXHR){
