@@ -147,6 +147,9 @@ form#add-picture label.error {
   background-color: #0001C3;
   border: none;
 }
+#spin {
+  display: none;
+}
 
 
 

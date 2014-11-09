@@ -304,10 +304,10 @@
                                 if(obj.action != 0)
                                     var action = obj.action.action;
 
-                                console.log("Action: "+obj.action);
+                                console.log("Action: "+obj.action.action);
                                 console.log("Last action ID: "+lastActionId);
                                 console.log("Action ID: "+obj.action.id);
-                                if(action.id != lastActionId) {
+                                if(obj.action.id != lastActionId) {
                                     lastActionId = obj.action.id;
 
                                     if(action == "left") {

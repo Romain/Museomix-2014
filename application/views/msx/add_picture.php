@@ -69,6 +69,9 @@
 
                     <div class="text-center">
                         <?php echo form_submit(array('name' => 'submit', 'value' => 'Partager', 'class' => 'btn btn-default margin-top')); ?>
+                        <div id="spin">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </div>
                     </div>
 
                 <?php echo form_close(); ?>
@@ -145,6 +148,14 @@
                     sound.src = "<?php echo base_url('assets/sounds') ?>/"+selectedSound;
 
                     sound.play();
+                });
+
+                // On submit, display a spinner
+                $("input[type=submit]").click(function() {
+                    if($("#add-picture").valid()) {
+                        $("input[type=submit]").fadeOut();
+                        $("#spin").fadeIn();
+                    }
                 });
             });
         </script>
