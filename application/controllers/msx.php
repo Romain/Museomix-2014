@@ -66,7 +66,7 @@ class Msx extends CI_Controller {
 			else {
 				// Set the variables
 				if(isset($_POST['comment']) && (strlen($_POST['comment']) != 0))
-					$comment = $this->input->post('comment', TRUE);
+					$comment = nl2br($this->input->post('comment', TRUE));
 				else
 					$comment = NULL;
 
