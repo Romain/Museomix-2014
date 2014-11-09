@@ -24,7 +24,7 @@ elseif(strcmp(ENVIRONMENT, "preprod") == 0)
 	$config['base_url']	= 'xxx';
 
 else
-	$config['base_url']	= 'http://www.xxx.com/';
+	$config['base_url']	= 'http://www.museozoom.com/';
 
 /*
 |--------------------------------------------------------------------------

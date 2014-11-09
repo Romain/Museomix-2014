@@ -101,9 +101,9 @@ elseif(strcmp(ENVIRONMENT, "preprod") == 0) {
 }
 else {
 	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'archishop';
-	$db['default']['password'] = 'CgeFaTYz2K3q';
-	$db['default']['database'] = 'archishop';
+	$db['default']['username'] = 'museozoom';
+	$db['default']['password'] = 'jt2fbHn56vbLAHD4';
+	$db['default']['database'] = 'protos_museozoom';
 	$db['default']['dbdriver'] = 'mysql';
 	$db['default']['dbprefix'] = '';
 	$db['default']['pconnect'] = TRUE;

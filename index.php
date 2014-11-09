@@ -37,9 +37,9 @@ elseif(strcmp($_SERVER['SERVER_NAME'], "xxx") == 0){
 	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
 	ini_set('memory_limit','64M');
 }
-elseif((strcmp($_SERVER['SERVER_NAME'], "www.xxx.com") == 0) || (strcmp($_SERVER['SERVER_NAME'], "xxx.com") == 0)){
+elseif((strcmp($_SERVER['SERVER_NAME'], "www.museozoom.com") == 0) || (strcmp($_SERVER['SERVER_NAME'], "museozoom.com") == 0)){
 	define('ENVIRONMENT', 'production');
-	define('DBPREFIX', 'swatch_fwt_');
+	define('DBPREFIX', 'museozoom_');
 	define('DASHBOARD', '/');
 	define('BASEFOLDER', $_SERVER['DOCUMENT_ROOT']);
 	ini_set('memory_limit','64M');
@@ -84,10 +84,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-if((strcmp(ENVIRONMENT, "development") == 0) || (strcmp(ENVIRONMENT, "test") == 0))
 	$system_path = 'system';
-else
-	$system_path = '../system';
 
 /*
  *---------------------------------------------------------------

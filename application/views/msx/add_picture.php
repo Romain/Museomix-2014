@@ -39,8 +39,19 @@
                         <?php echo form_dropdown('sound', array(
                                 '0' => 'Nos sons d\'ambiance', 
                                 'arme.mp3' => 'Arme', 
-                                'baleine.mp3' => 'Baleine', 
-                                'canon.mp3' => 'Canon.mp3'
+                                'canon.mp3' => 'Canon', 
+                                'cariole.mp3' => 'Cariole', 
+                                'chaine.mp3' => 'Chaine', 
+                                'cariole.mp3' => 'Cariole', 
+                                'cheval.mp3' => 'Cheval', 
+                                'cristallin.mp3' => 'Cristallin', 
+                                'epee.mp3' => 'Epée', 
+                                'explosion.mp3' => 'Explosion', 
+                                'goupille-sol.mp3' => 'Cartouche qui tombe sur le sol', 
+                                'harpe.mp3' => 'Harpe 1', 
+                                'harpe2.mp3' => 'Harpe 2', 
+                                'lame-de-couteau.mp3' => 'Lame de couteau qu\'on aiguise', 
+                                'ours.mp3' => 'Ours'
                             ), '0', 'class="form-control"'); ?>
                     </div>
 
@@ -63,11 +74,7 @@
         </div>
 
         <div id="sounds">
-            <audio id="sound">
-                <source src="<?php echo base_url('assets/sounds/arme.mp3'); ?>" type="audio/mpeg">
-                <source src="<?php echo base_url('assets/sounds/arme.ogg'); ?>" type="audio/ogg">
-                Your browser does not support the audio element.
-            </audio>
+            <audio id="sound" src="<?php echo base_url('assets/sounds/arme.mp3'); ?>"></audio>
         </div>
 
         <!-- Modal -->
@@ -92,7 +99,6 @@
 
         <?php include('inc/js.php'); ?>
         <script src="<?php echo base_url('assets/js/validation/dist/jquery.validate.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/audiojs/audiojs/audio.min.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
 
@@ -118,28 +124,15 @@
                 });
 
                 // Play sound when the user changes the menu
-                var sound = $("#sounds audio#sound").get(0);
+                var sound = $("#sounds audio#sound");
 
                 $("#add-picture select[name='sound']").change(function() {
-                    // Pause any sound playing
-                    sound.pause();
-
-                    // Rewind to the beginning of the sound
-                    sound.currentTime = 0;
 
                     // Set the new sound
                     var selectedSound = $(this).val();
-                    var selectedSoundOgg = selectedSound.substr(0, selectedSound.length - 3) + "ogg";
-                    $("#sounds audio#sound source:first-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
-                    $("#sounds audio#sound source:last-child").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSoundOgg);
+                    sound.src = "<?php echo base_url('assets/sounds') ?>/"+selectedSound;
 
-                    // Play the new sound
-                    sound.load();
                     sound.play();
-                });
-
-                audiojs.events.ready(function() {
-                    var as = audiojs.createAll();
                 });
             });
         </script>
