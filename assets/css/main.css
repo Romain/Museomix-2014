@@ -52,6 +52,7 @@ img {
   background: url(../img/gabarit-portable.jpg) no-repeat;
   background-size: cover;
   background-position: center center;
+  padding: 0;
 }
 #index-body a {
   display: block;
@@ -186,8 +187,11 @@ form#update-pictures {
 }
 #firstname {
   height: 20px;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 10px;
+}
+#comment {
+  font-size: 30px;
 }
 
 
