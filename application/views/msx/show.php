@@ -215,6 +215,7 @@
                     // Set the other information
                     $("#firstname").empty().text(firstnames[imagesPointer]);
                     $("#comment").empty().text(comments[imagesPointer]);
+                    console.log(comments[imagesPointer]);
 
                     // Pause any sound playing
                     sound.pause();
@@ -311,7 +312,11 @@
                                     lastActionId = obj.action.id;
 
                                     if(action == "left") {
-                                        imagesPointer -= 2;
+                                        if(imagesPointer > 1)
+                                            imagesPointer -= 2;
+                                        else
+                                            imagesPointer = images.length;
+                                        
                                         setNewImage();
                                         // rotate = "doNoting";
                                         timer = 0;

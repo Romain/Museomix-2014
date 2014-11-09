@@ -17,14 +17,7 @@ class Msx extends CI_Controller {
 
 	public function index() {
 
-		// We prepare data that need to be displayed.
-		$data = array();
-		$data = $this->prepare_data($data);
-
-		if(isset($data))
-			$this->load->view('msx/index', $data);
-		else
-			$this->load->view('msx/index');
+		redirect('picture/add');	
 	}
 
 

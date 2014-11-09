@@ -26,8 +26,8 @@ L'application se compose de 2 éléments :
 - une appli flash qui permet de gérer les mouvements des visiteurs captés par la Kinect
 
 Pour installer l'application il faut :
-1. Installez le site sur un serveur de type LAMP. Pour la démo réalisée dans le cadre de Museomix 2014 à Saint-Etienne, ce site est d'ores et déjà installé sur le serveur hébergeant museomix.org, et il utilise le nom de domaine museozoom.com.
+- Installez le site sur un serveur de type LAMP. Pour la démo réalisée dans le cadre de Museomix 2014 à Saint-Etienne, ce site est d'ores et déjà installé sur le serveur hébergeant museomix.org, et il utilise le nom de domaine museozoom.com.
 Pour installer le site sur un serveur, uploadez les fichier via un logiciel FTP type Filezilla, renommez le htaccess-prod.txt en .htaccess et en faisant les modifications nécessaires. Installez manuellement la table sessions grâce au fichier sql présent dans le dossier install. Lancez l'URL http://votredomaine.com/private/migrate pour installer toutes les autres tables.
-2. Générez éventuellement un QR code vers votre URL (ex : http://www.museozoom.com) et partagez le.
-3. La partie Kinect est difficilement réplicable car il n'existe plus de librairies OpenNI pour mac pour faire tourner l'application flash nécessaire. Pour la démo Museomix, nous avons dû trouver un ordinateur avec ces librairies déjà installées, ce qui fut compliqué.
-4. Branchez un ordinateur à un écran ou un vidéo projecteur. Assurez-vous que cet ordinateur soit connecté à internet. Ouvrez un navigateur (de préférence Chrome), puis lancez l'URL suivante : http://votredomaine.com/show. Passez le navigateur en plein écran.
+- Générez éventuellement un QR code vers votre URL (ex : http://www.museozoom.com) et partagez le.
+- La partie Kinect est difficilement réplicable car il n'existe plus de librairies OpenNI pour mac pour faire tourner l'application flash nécessaire. Pour la démo Museomix, nous avons dû trouver un ordinateur avec ces librairies déjà installées, ce qui fut compliqué.
+- Branchez un ordinateur à un écran ou un vidéo projecteur. Assurez-vous que cet ordinateur soit connecté à internet. Ouvrez un navigateur (de préférence Chrome), puis lancez l'URL suivante : http://votredomaine.com/show. Passez le navigateur en plein écran.
