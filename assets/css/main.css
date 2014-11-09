@@ -10,6 +10,10 @@
   font-family: 'Eboy';
 }
 
+a, a:visited {
+  color: #0001C3;
+}
+
 
 
 
@@ -68,7 +72,7 @@ img {
   top: 5px;
   right: 0px;
   font-size: 30px;
-  background-color: #DDD;
+  background-color: #FFF;
   border: solid 1px #AAA;
   border-radius: 5px 0px 0px 5px;
   padding: 5px 20px 5px 20px;
@@ -90,7 +94,7 @@ form#add-picture label.error {
 #picture-container {
   background: url(../img/flash-button.jpg) no-repeat;
   background-size: contain;
-  width: 300px;
+  width: 280px;
   height: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -108,11 +112,20 @@ form#add-picture label.error {
   display: none;
 }
 
+.modal-content {
+  background: none;
+}
 .modal-body {
   position: relative;
   overflow-y: auto;
   max-height: 400px;
-  padding: 15px;
+  padding: 0px;
+  color: #0001C3;
+  border-right: none;
+}
+.modal-footer {
+  background-color: #0001C3;
+  border: none;
 }
 
 

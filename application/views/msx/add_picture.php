@@ -31,7 +31,7 @@
                 <?php echo form_open_multipart( base_url('picture/add'), array('id' => 'add-picture', 'class' => '', 'role' => 'form'), array($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()) ); ?>
 
                     <div class="form-group">
-                        <div id="picture-container">
+                        <div id="picture-container" class="shadow">
                             <?php echo form_upload( array('name' => 'picture', 'placeholder' => 'Votre photo', 'class' => 'form-control', 'id' => 'picture') ); ?>
                         </div>
                     </div>
@@ -83,14 +83,8 @@
         <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Aide</h4>
-                    </div>
                     <div class="modal-body">
-                        <p>
-                            Retrouvez toute l'aide nécessaire à l'utilisation de MuseoZoom dans cette section.
-                        </p>
+                        <img src="<?php echo base_url('assets/img/instructions-projection.jpg') ?>" alt="Instructions" title="Instructions">
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
