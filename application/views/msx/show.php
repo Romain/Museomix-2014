@@ -23,7 +23,9 @@
         <div id="picture-details">
             <div class="row">
                 <div class="col-sm-3">
-                    <div id="firstname"></div>
+                    <div id="firstname">
+                        <?php echo $pictures[0]->{'name'}; ?>
+                    </div>
                     <div id="museozoom">
                         <img src="<?php echo base_url('assets/img/museozoom.png'); ?>" alt="MuseoZoom" title="MuseoZoom">
                     </div>
