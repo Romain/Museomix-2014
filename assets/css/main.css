@@ -1,7 +1,14 @@
 /* Font styles
 -------------------------------------------------- */
 
-/* @import url(http://fonts.googleapis.com/css?family=Dosis:300,400,600|Open+Sans:400,700,300|Open+Sans+Condensed:300,700); */
+@font-face {
+  src: url(../fonts/Abel-Regular.ttf);
+  font-family: 'Abel';
+}
+@font-face {
+  src: url(../fonts/Eboy-EXTBeta.otf);
+  font-family: 'Eboy';
+}
 
 
 
@@ -11,9 +18,8 @@
 
 body {
   padding: 10px;
-  font-family: Helvetica, Tahoma, sans-serif;
-  font-size: 18px;
-  color: #FFF;
+  font-family: 'Abel', Helvetica, Tahoma, sans-serif;
+  font-size: 24px;
 }
 
 .wrapper {
@@ -37,6 +43,16 @@ img {
 /* Add picture styles
 -------------------------------------------------- */
 
+#add-body {
+  background-color: #0001C3;
+  font-family: 'Abel', Helvetica, Tahoma, sans-serif;
+  color: #FFF;
+  padding-bottom: 30px;
+}
+#add-body .form-control {
+  border: none;
+  border-radius: 0;
+}
 #help {
   position: fixed;
   top: 5px;
@@ -97,12 +113,13 @@ form#update-pictures {
   left: 0;
   width: 100%;
   height: auto;
+  color: #FFF;
   padding: 20px 40px;
   z-index: 100;
 }
 #firstname {
   height: 20px;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 

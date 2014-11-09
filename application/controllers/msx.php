@@ -154,6 +154,50 @@ class Msx extends CI_Controller {
 
     /**
      *
+     * Controller which detects the actions of the user
+     *
+     */
+
+	public function detect_action() {
+
+		// We prepare data that need to be displayed.
+		$data = array();
+		$data = $this->prepare_data($data);
+
+		if($this->uri->segment(3)) {
+			$action = $this->uri->segment(3);
+
+			// Generate a secret_id
+			$secret_id_availability = TRUE;
+			while($secret_id_availability) {
+				$secret_id = $this->generate_token();
+				$secret_id = substr($secret_id, 0, 10);
+				$secret_id_availability = $this->msx_model->get_action_info(array('secret_id' => $secret_id));
+			}
+
+			$params = array(
+				"secret_id" => $secret_id,
+				"action" => $action,
+				"created_at" => time()
+			);
+			$action_id = $this->msx_model->add_action($params);
+
+			if($action_id != FALSE)
+				$data["result"] = $action;
+			else
+				$data["result"] = "error";
+		}
+
+		if(isset($data))
+			$this->load->view('msx/result', $data);
+		else
+			$this->load->view('msx/result');
+	}
+
+
+
+    /**
+     *
      * Controller which updates the list of pictures from ajax requests
      *
      */
@@ -162,6 +206,30 @@ class Msx extends CI_Controller {
 
 		$pictures = $this->msx_model->get_pictures();
 		echo json_encode( array("pictures" => $pictures) );
+	}
+
+
+
+    /**
+     *
+     * Controller which gets the last action requested
+     *
+     */
+
+	public function get_last_action() {
+
+		$actions = $this->msx_model->get_actions();
+
+		if($actions != FALSE) {
+			$action = $actions[0];
+			for($i=0; $i<count($actions); $i++) {
+				$this->msx_model->delete_action( array("id" => $actions[$i]->{'id'}) );
+			}
+		}
+		else
+			$action = 0;
+
+		echo json_encode( array("action" => $action) );
 	}
 
 

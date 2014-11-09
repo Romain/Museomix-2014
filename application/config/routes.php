@@ -44,6 +44,10 @@ $route['404_override'] = '';
 $route['picture/add'] = 'msx/add_picture';
 $route['show'] = 'msx/show';
 $route['pictures/update_list'] = 'msx/update_pictures_list';
+$route['action/detect'] = 'msx/detect_action';
+$route['action/detect/(:any)'] = 'msx/detect_action';
+$route['action/get'] = 'msx/get_last_action';
+$route['action/delete'] = 'msx/delete_action';
 
 $route['private/migrate'] = 'migrate';
 

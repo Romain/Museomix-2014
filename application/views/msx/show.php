@@ -28,8 +28,15 @@
                         <img src="<?php echo base_url('assets/img/museozoom.png'); ?>" alt="MuseoZoom" title="MuseoZoom">
                     </div>
                 </div>
-                <div class="col-sm-6 col-sm-offset-1">
-                    <div id="comment"></div>
+                <div class="col-sm-1 col-sm-offset-1">
+                    <div id="gun">
+                        <img src="<?php echo base_url('assets/img/gun.png'); ?>" alt="Pistolet MuseoZoom" title="Pistolet MuseoZoom">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="comment">
+                        <?php echo $pictures[0]->{'comment'}; ?>
+                    </div>
                 </div>
                 <div class="col-sm-1">
                     <img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo MuseoZoom" title="Logo MuseoZoom">
@@ -39,7 +46,7 @@
 
         <div id="sounds">
             <audio id="sound">
-                <source src="<?php echo base_url('sounds/'.$pictures[0]->{'sound'}); ?>" type="audio/mpeg">
+                <source src="<?php echo base_url('assets/sounds/'.$pictures[0]->{'sound'}); ?>" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -69,7 +76,6 @@
                 var screenHeight = window.innerHeight;
                 $("#image-back").width(screenWidth);
                 $("#image-back").height(screenHeight);
-                console.log(screenWidth+" - "+screenHeight);
 
                 // Set the images
                 var images = [<?php 
@@ -117,71 +123,78 @@
                 var imagePosition = "back";
 
                 // Make the image rotate
-                setNewImage();
+                var rotation = setInterval(function() {
+                    setNewImage(imagesPointer);
+                }, 5000);
 
                 // Update the list of images and sounds
-                updatePicturesList()
+                updatePicturesList();
+
+                // Get the last action
+                getAction();
 
 
                 /**************************************************/
                 /************* Additional functions ***************/
                 /**************************************************/
 
-                function setNewImage() {
-                    setTimeout(function() {
-                        // Set the image pointer
-                        if(imagesPointer < images.length - 1)
-                            imagesPointer++;
-                        else
-                            imagesPointer = 0;
+                function setNewImage(imageNumber) {
+                    // Set the image pointer
+                    if(imagesPointer < images.length - 1)
+                        imagesPointer++;
+                    else
+                        imagesPointer = 0;
 
-                        if(imagesChanged == 1) {
-                            imagesPointer = 0;
-                            imagesChanged = 0;
-                        }
+                    if(imagesChanged == 1) {
+                        imagesPointer = 0;
+                        imagesChanged = 0;
+                    }
 
-                        // Set the which div will receive the image
-                        if(imagePosition == "back")
-                            imagePosition = "top";
-                        else
-                            imagePosition = "back";
+                    // Set the which div will receive the image
+                    if(imagePosition == "back")
+                        imagePosition = "top";
+                    else
+                        imagePosition = "back";
 
-                        // Set the image in the div
-                        $("#image-"+imagePosition).css("background", "url("+images[imagesPointer]+") no-repeat");
-                        $("#image-"+imagePosition).css("backgroundSize", "cover");
-                        $("#image-"+imagePosition).css("backgroundPosition", "center center");
+                    // Set the image in the div
+                    $("#image-"+imagePosition).css("background", "url("+images[imagesPointer]+") no-repeat");
+                    $("#image-"+imagePosition).css("backgroundSize", "cover");
+                    $("#image-"+imagePosition).css("backgroundPosition", "center center");
 
-                        // Animate the divs
-                        if(imagePosition == "back") {
-                            $("#image-top").animate({
-                                opacity: 0
-                            }, 500);
-                        }
-                        else {
-                            $("#image-top").animate({
-                                opacity: 1
-                            }, 500);   
-                        }
+                    // Animate the divs
+                    if(imagePosition == "back") {
+                        $("#image-top").animate({
+                            opacity: 0
+                        }, 500);
+                    }
+                    else {
+                        $("#image-top").animate({
+                            opacity: 1
+                        }, 500);   
+                    }
 
-                        // Set the other information
-                        $("#firstname").empty().text(firstnames[imagesPointer]);
-                        $("#comment").empty().text(comments[imagesPointer]);
+                    // Display or hide the gun
+                    if(comments[imagesPointer] == "")
+                        $("#gun").fadeOut();
+                    else
+                        $("#gun").fadeIn();
 
-                        // Pause any sound playing
-                        sound.pause();
+                    // Set the other information
+                    $("#firstname").empty().text(firstnames[imagesPointer]);
+                    $("#comment").empty().text(comments[imagesPointer]);
 
-                        // Set the new sound
-                        var selectedSound = sounds[imagesPointer];
-                        $("#sounds audio#sound source").attr("src", "<?php echo base_url('sounds') ?>/"+selectedSound);
+                    // Pause any sound playing
+                    sound.pause();
 
-                        // Play the new sound
-                        if(selectedSound != 0) {
-                            sound.load();
-                            sound.play();
-                        }
+                    // Set the new sound
+                    var selectedSound = sounds[imagesPointer];
+                    $("#sounds audio#sound source").attr("src", "<?php echo base_url('assets/sounds') ?>/"+selectedSound);
 
-                        setNewImage();
-                    }, 5000);
+                    // Play the new sound
+                    if(selectedSound != 0) {
+                        sound.load();
+                        sound.play();
+                    }
                 }
 
 
@@ -231,6 +244,47 @@
                         
                         updatePicturesList();
                     }, 10000);
+                }
+
+
+
+                function getAction() {
+
+                    setTimeout(function() {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= base_url("action/get") ?>',
+                            data: { 
+                                '0': $("form#update-pictures input[name='0']").val(), 
+                                '1': $("form#update-pictures input[name='1']").val(), 
+                                'csrf_museomix_2014': $("form#update-pictures input[name='csrf_museomix_2014']").val()
+                            },
+                            success: function(data, textStatus, jqXHR){
+                                var obj = $.parseJSON(data);
+                                console.log(obj.action.action);
+                                
+                                if(obj.action != 0)
+                                    var action = obj.action.action;
+
+                                if(action == "left") {
+                                    imagesPointer -= 2;
+                                    window.clearInterval(rotation);
+                                    setNewImage(imagesPointer);
+                                }
+                                else if(action == "right") {
+                                    window.clearInterval(rotation);
+                                    setNewImage(imagesPointer);
+                                }
+                            },
+                            error: function(data, textStatus, jqXHR){
+                                var obj = $.parseJSON(data);
+                                console.log(obj);
+                            }
+                        });
+                        
+                        getAction();
+                    }, 2000);
                 }
             });
         </script>

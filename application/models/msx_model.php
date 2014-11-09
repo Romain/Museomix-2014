@@ -191,4 +191,127 @@ class Msx_model extends CI_Model {
         return TRUE;
     }
 
+
+    /**
+     *
+     * Method to get all the actions
+     * 
+     * Params:
+     * 
+     * 
+     *
+     */
+
+    public function get_actions(){
+
+        $this->db->select('*');
+        $this->db->order_by("updated_at", "asc"); 
+        
+        $query = $this->db->get(DBPREFIX.'actions');
+        
+        if($query->num_rows() > 0)
+            return $query->result();
+        else
+            return FALSE;
+    }
+
+
+    /**
+     *
+     * Method to get the info of a specific action
+     * 
+     * Params:
+     * id or secret_id
+     * 
+     *
+     */
+
+    public function get_action_info($params = array()){
+
+        // required values
+        if((!$this->_required(array('id'), $params))
+            && (!$this->_required(array('secret_id'), $params))) return FALSE;
+
+        $this->db->select('*');
+        
+        if(isset($params['id']))
+            $this->db->where('id', $params['id']); 
+        elseif(isset($params['secret_id']))
+            $this->db->where('secret_id', $params['secret_id']);
+        
+        $query = $this->db->get(DBPREFIX.'actions');
+        
+        if($query->num_rows() > 0)
+            return $query->result();
+        else
+            return FALSE;
+    }
+
+
+    /**
+     *
+     * Method to create a new action.
+     * 
+     * Params:
+     * action, created_at
+     * 
+     *
+     */
+
+    public function add_action($params = array()){
+
+        // required values
+        if((!$this->_required(array('action'), $params)) 
+            || (!$this->_required(array('created_at'), $params)) ) 
+            return FALSE;
+
+        $this->db->insert(DBPREFIX.'actions', $params);
+        return $this->db->insert_id();
+    }
+
+
+    /**
+     *
+     * Method to delete an action.
+     * 
+     * Params:
+     * id
+     * 
+     *
+     */
+
+    public function delete_action($params = array()) {
+
+        // required values
+        if(!$this->_required(array('id'), $params)) return FALSE;
+
+        // On supprime l'inscrit
+        $this->db->delete(DBPREFIX.'actions', $params);
+    
+        return TRUE;
+    }
+
+
+    /**
+     *
+     * Method to edit the information of an action.
+     * 
+     * Params:
+     * id (mandatory)
+     * 
+     *
+     */
+
+    public function edit_action($params = array()){
+
+        // required values
+        if(!$this->_required(array('id'), $params)) return FALSE;
+
+        $this->db->where('id', $params['id']);
+        unset($params['id']);
+        $this->db->update(DBPREFIX.'actions', $params);
+        
+        return TRUE;
+    }
+
 }

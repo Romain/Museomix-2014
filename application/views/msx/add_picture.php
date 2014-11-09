@@ -5,7 +5,7 @@
         <?php include('inc/css.php'); ?>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
-    <body>
+    <body id="add-body">
         <div class="wrapper">
             <a href="#" title="Accéder à l'aide" data-toggle="modal" data-target="#helpModal">
                 <div id="help">
