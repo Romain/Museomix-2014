@@ -6,7 +6,7 @@ Matériel
 
 - Plexiglasse et vinyl pour la signalétique et la communication
 - La suite Adobe pour l'ensemble du travail
-- Le code est développé en PHP, Javascript, HTML, CSS, MySQL. Code Limiter a permis de développer en PHP, JQuery pour le Javascript, Twitter Bootstrap pour la mise en forme, et Abode Air pour la Kinect
+- Le code est développé en PHP, Javascript, HTML, CSS, MySQL. Le framework Code Igniter a été utilisé pour simplifier les développements backend, JQuery les développements frontend, et Twitter Bootstrap la mise en forme. Abode Air a été utilisé pour la connexion avec la Kinect.
 - Enfin, Premiere Pro pour la vidéo
 
 ## Emprunté à la tech-shop
